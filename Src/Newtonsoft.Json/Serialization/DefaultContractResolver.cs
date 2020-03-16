@@ -828,10 +828,16 @@ namespace Newtonsoft.Json.Serialization
             ResolveCallbackMethods(contract, contract.NonNullableUnderlyingType);
         }
 
-        private void ResolveCallbackMethods(JsonContract contract, Type t)
+        /// <summary>
+        /// Resolves serialization callback methods. Implementers should set appropriate OnSerializingCallbacks, 
+        /// OnSerializedCallbacks, OnDeserializingCallbacks, OnDeserializedCallbacks, OnErrorCallbacks properties for contract object
+        /// </summary>
+        /// <param name="contract">Contract details</param>
+        /// <param name="objectType">Type of the object.</param>
+        protected virtual void ResolveCallbackMethods(JsonContract contract, Type objectType)
         {
             GetCallbackMethodsForType(
-                t,
+                objectType,
                 out List<SerializationCallback>? onSerializing,
                 out List<SerializationCallback>? onSerialized,
                 out List<SerializationCallback>? onDeserializing,
